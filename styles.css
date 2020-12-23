@@ -10,7 +10,7 @@ body
     height:60px;
 }
 
-.expanded-div
+.expanded
 {
     display:block;
     box-sizing: border-box;
@@ -19,14 +19,32 @@ body
     height:300px;
 }
 
-.construction
+.ed-head
 {
-    background:yellow;
-    border:2px dashed black;
     font-size:18px;
     font-weight:bold;
     text-align:center;
+    height:60px;
     padding:0px 10px 0px 15px;
+}
+.construction-head
+{
+    background:yellow;
+    border:2px dashed black;  
+}
+.construction
+{
+    background:yellow;
+}
+
+.ed-body
+{
+    height:200px;
+}
+.red
+{
+    background:red;
+
 }
 
 .collapse-button
@@ -34,10 +52,16 @@ body
     display:block;
     float:right;
     position:relative;
-    top:-15px;
-    font-size:40px;
+    top:-10px;
+    font-family:monospace;
+    font-size:30px;
     font-weight:bold;
     margin-right:10px;
     margin-top:0px;
-    vertical-align: middle;
+}
+
+.collapse-button:hover
+{
+    
+    cursor:pointer;
 }

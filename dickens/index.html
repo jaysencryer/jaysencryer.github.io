@@ -4,51 +4,43 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>What the Dickens!</title>
-  <style>
-	body, p, h2
-	{
-		background:black;
-		color:black;
-		font-family:"Georgia", serif;
-    text-shadow: 2px 4px 8px #cccccc, -2px -4px 8px #eeeeee;
-		margin:0px;
-	}
-    .main
-    {
-       padding-top:1%;
- 	width:600;
-        display:block;
-        margin:auto;
-        text-align:center;
-    }
-
-    .video
-	    {
-
-    position: relative;
-    padding-bottom: 56.25%;
-    padding-top: 35px;
-    height: 0;
-    overflow: hidden;
- }
-
-
-.video iframe {
-    position: absolute;
-    top:0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="main">
-<h2>What The Dickens?</h2>
-<p>(A one-man improvised Christmas Ghost Story)</p>
-<div class="video">
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/x02D569rtR8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-  </div></div>
+    
+    <h2>What The Dickens?</h2>
+    <p>(A one-man improvised Christmas Ghost Story)</p>
+    <div class="chap_nav">
+      
+      <p><span class="snowflake" data-timecode="">*</span>
+      <p class="undertext">menu</p>
+      <div class="menu">
+        <p><span class="menu_option" data-timecode="38">Introduction</span></p>
+        <p><span class="menu_option" daya-timecode="163">"I require a suggestion"</span></p>
+        <p><span class="menu_option" data-timecode="189">Stave One - "A Christmas Carol"</span></p>
+        <p><span class="menu_option" data-timecode="294">Ebeneezer Scrooge</span></p>
+        <p><span class="menu_option" data-timecode="545">"I might take tomorrow off"</span></p>
+        <p><span class="menu_option" data-timecode="623">The home of Scrooge</span></p>
+        <p><span class="menu_option" data-timecode="757">Marley's Ghost</span></p>
+        <p><span class="menu_option" data-timecode="1065">Stave Two - The Ghost of Christmas Past</span></p>
+        <p><span class="menu_option" data-timecode="1347">Mr Fezziwig</span></p>
+        <p><span class="menu_option" data-timecode="1614">Stave Three - The Ghost of Christmas Present</span></p>
+        <p><span class="menu_option" data-timecode="1792">The House of Bob Cratchit</span></p>
+        <p><span class="menu_option" data-timecode="2171">"This Tiny Tim, what will become of him?"</span></p>
+        <p><span class="menu_option" data-timecode="2315">Stave Four - The Ghost of Christmas Yet to Come</span></p>
+        <p><span class="menu_option" data-timecode="2799">A Graveyard</span></p>
+        <p><span class="menu_option" data-timecode="2905">Stave Five - Christmas Day</span></p>
+        <p><span class="menu_option" data-timecode="3173">Bob Cratchit's house (again)</span></p>
+        <p><span class="menu_option" data-timecode="3362">"What say you, Tiny Tim?"</span></p>
+        <p><span class="menu_option" data-timecode="3405">Curtain Call</span></p>
+      </div>
+    </div>
+    
+    <div class="video">
+      <iframe id="youtvid" width="560" height="315" src="https://www.youtube.com/embed/x02D569rtR8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  
+  </div>
+  <script src="menu.js"></script>
 </body>

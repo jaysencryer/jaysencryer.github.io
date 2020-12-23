@@ -1,0 +1,94 @@
+body, h2	{
+    background:black;
+    color:black;
+    font-family:"Georgia", serif;
+    text-shadow: 2px 4px 8px #cccccc, -2px -4px 8px #eeeeee;
+    margin:0px;
+}
+
+.main {
+    padding-top:.5%;
+ 	width:600;
+    display:block;
+    margin:auto;
+    text-align:center;
+}
+
+.video  {
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 35px;
+    height: 0;
+    overflow: hidden;
+}
+
+.video iframe {
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.chap_nav {
+    position: relative;
+    display:inline-block;
+    background:transparent;
+    width:40%;
+    font-size:26px;
+    margin:5px;
+}
+
+
+.snowflake {
+    font-size: 60px;
+    color:#353535;
+    
+    font-family:"Georgia", serif;
+    text-shadow:-12px -6px 3px whitesmoke, 
+        0px -12px 3px lightblue,
+        12px 6px 3px lightblue,
+        12px -6px 3px whitesmoke,
+        0px 12px 3px whitesmoke,   
+        -12px 6px 3px lightblue;
+}
+
+.snowflake:hover {
+    cursor:pointer;
+}
+.undertext {
+    font-size:small;
+    margin:none;
+    padding:none;
+    position:relative;
+    top: -24px;
+}
+.menu {
+    display:none;
+    position: absolute;
+    background:transparent;
+    left:0;
+    right:0;
+    margin-left:auto;
+    margin-right:auto;
+    text-align:center;
+    
+    z-index:2;
+}
+
+.show {
+    display:block;
+}
+
+.menu_option:hover {
+    cursor:pointer;
+    color:lightblue;
+}
+
+p {
+    margin:2px;
+}
+
+
+
+
