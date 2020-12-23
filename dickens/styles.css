@@ -39,6 +39,25 @@ body, h2	{
     margin:5px;
 }
 
+@media screen and (max-width:585px) {
+    .chap_nav {
+        font-size:16px;
+    }
+}
+
+
+
+@media screen and (max-width:345px) {
+    .chap_nav {
+        font-size:12px;
+    }
+}
+
+@media screen and (max-width:255px) {
+    .chap_nav {
+        font-size:10px;
+    }
+}
 
 .snowflake {
     font-size: 60px;
