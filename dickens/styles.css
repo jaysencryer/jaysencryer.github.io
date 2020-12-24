@@ -2,7 +2,7 @@ body, h2	{
     background:black;
     color:black;
     font-family:"Georgia", serif;
-    text-shadow: 2px 4px 8px #cccccc, -2px -4px 8px #eeeeee;
+    text-shadow: 2px 4px 8px #dedede, -2px -4px 8px #efefef;
     margin:0px;
 }
 
@@ -37,6 +37,22 @@ body, h2	{
     width:100%;
     font-size:26px;
     margin:5px;
+}
+
+.mobile_message {
+    display: none;
+    position: absolute;
+    background:transparent;
+    top:63px;
+    left:0;
+    right:0;
+    padding:0;
+    margin-top:1px;
+    margin-left:auto;
+    margin-right:auto;
+    text-align:center;
+    font-size:12px;
+    z-index:1;
 }
 
 @media screen and (max-width:585px) {
@@ -108,6 +124,8 @@ p {
     margin:2px;
 }
 
-
+.dim { 
+    opacity: 0.2;
+}
 
 
