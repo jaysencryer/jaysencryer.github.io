@@ -1,0 +1,29 @@
+:root {
+    font-size: larger;
+    font-family: Montserrat, sans-serif;
+    font-weight: bold;
+}
+
+div {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-around;
+    align-content: space-around;
+    align-items: stretch;
+}
+
+
+button {
+    border: 0px;
+    border-radius: 20px;
+    padding: 20px;
+    margin: 10px;
+    /* box-shadow: 6px 8px coral; */
+    background: #ff7f505c;
+    cursor: pointer;
+    font-family: Monserrat, 'Arial Narrow Bold', sans-serif;
+    font-weight: bold;
+    font-size:larger;
+    font-kerning: 20px;
+}
