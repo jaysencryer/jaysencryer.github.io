@@ -1,22 +1,26 @@
 const CLOSED = 0;
 const OPEN = 1;
-const NOT_READY = 0;
-const READY = 1;
-const SPREAD = 2;
 
 const BREAD_BAG_ID = 'bread-bag';
 const PB_JAR_ID = 'pb-jar';
 const JELLY_JAR_ID = 'jelly-jar';
 const BREAD_SLICE_1_ID = 'bread-slice1';
 const BREAD_SLICE_2_ID = 'bread-slice2';
+const SANDWICH_ID = 'pb-j-sandwich';
 
 const PB_BREAD = "Bread with Peanut Butter on it.";
 const JELLY_BREAD = "Bread with Jelly on it.";
 
 
 const sandwichStatus = {
-    firstSlice: NOT_READY,
-    secondSlice: NOT_READY,
+    firstSlice: {
+        ready: false,
+        spread: false,
+    },
+    secondSlice: {
+        ready: false,
+        spread: false,
+    },
     spreadPb: false,
     spreadJelly: false,
     complete: false
@@ -34,18 +38,18 @@ function takeASliceOfBread() {
         return;
     }
 
-    if (sandwichStatus.secondSlice) {
+    if (sandwichStatus?.secondSlice?.ready) {
         alert("I think two slices is enough");
         return;
     }
 
-    if (sandwichStatus.firstSlice > NOT_READY) {
-        sandwichStatus.secondSlice = READY;
+    if (sandwichStatus?.firstSlice?.ready) {
+        sandwichStatus.secondSlice.ready = true;
         document.getElementById(BREAD_SLICE_2_ID).removeAttribute("hidden");
         return;
     }
 
-    sandwichStatus.firstSlice = READY;
+    sandwichStatus.firstSlice.ready = true;
     document.getElementById(BREAD_SLICE_1_ID).removeAttribute("hidden");
 }
 
@@ -71,35 +75,46 @@ function openPbJar() {
 
 function setToOpen(id) {
     const thingToOpen = document.getElementById(id);
-    let text = thingToOpen.textContent.replace("Closed", "Open");
-    thingToOpen.textContent = text;
+    let src = thingToOpen.src.replace("closed", "open");
+    let altText = thingToOpen.getAttribute("alt").replace("Closed", "Open");
+    thingToOpen.setAttribute("alt", altText);
+    thingToOpen.src = src;
 }
 
 function spreadPB() {
+    console.log(sandwichStatus);
     if (pbJarStatus === CLOSED) {
         alert("Unable to get to Peanut Butter!");
         return;
     }
-
-    if (sandwichStatus.firstSlice === NOT_READY) {
+    
+    if (!sandwichStatus.firstSlice.ready) {
         alert("I guess we're spreading peanut butter over the counter?");
         return;
     }
-
-    if (sandwichStatus.spreadPb && sandwichStatus.secondSlice === READY) {
+    
+    if (sandwichStatus.firstSlice.spread && (sandwichStatus.secondSlice.spread || !sandwichStatus.secondSlice.ready)) {
+        alert("There's nowhere left to spread this Peanut Butter!");
+        return;
+    }
+    
+    if (sandwichStatus.firstSlice.spread && sandwichStatus.spreadPb && sandwichStatus.secondSlice.ready) {
         alert(`mmmmm, delicious PB & PB sandwich.  Not what we're looking for though \u2639`);
         return;
     }
-
+    
     sandwichStatus.spreadPb = true;
-    if (sandwichStatus.firstSlice === READY) {
+    let pbJar = document.getElementById(PB_JAR_ID);
+    let imageChange = pbJar.src.replace("open", "spread");
+    pbJar.src = imageChange;
+    if (!sandwichStatus.firstSlice.spread) {
         spreadOnBread(BREAD_SLICE_1_ID, PB_BREAD);
-    } else if (sandwichStatus.secondSlice === READY) {
+        sandwichStatus.firstSlice.spread = true;
+    } else if (sandwichStatus.secondSlice.ready && !sandwichStatus.secondSlice.spread) {
         spreadOnBread(BREAD_SLICE_2_ID, PB_BREAD);    
-    } else {
-        alert("We're gonna need more bread!");
+        sandwichStatus.secondSlice.spread = true;
     }
-
+    
 }
 
 function openJellyJar() {
@@ -107,41 +122,67 @@ function openJellyJar() {
         alert("The jelly jar is already open!");
         return;
     }
-
+    
     jellyJarStatus = OPEN;
     setToOpen(JELLY_JAR_ID);
 }
 
 function spreadJelly() {
+    console.log(sandwichStatus);
     if (jellyJarStatus === CLOSED) {
         alert("Unable to get to Jelly!");
         return;
     }
 
-    if (!sandwichStatus.firstSlice) {
+    if (!sandwichStatus.firstSlice.ready) {
         alert("I guess we're making a counter & Jelly mess?");
         return;
     }
 
-    if (sandwichStatus.spreadJelly && sandwichStatus.secondSlice) {
+    
+    if (sandwichStatus.firstSlice.spread && (!sandwichStatus.secondSlice.ready ||sandwichStatus.secondSlice.spread)) {
+        alert("There's nowhere left to spread this Jelly!");
+        return;
+    }
+
+    if (sandwichStatus.firstSlice.spread && sandwichStatus.spreadJelly && sandwichStatus.secondSlice.ready) {
         alert("mmmm, delicious Jelly & Jelly sandwich. Try again!");
         return;
     }
 
     sandwichStatus.spreadJelly = true;
-    if (sandwichStatus.firstSlice === READY) {
+    if (!sandwichStatus.firstSlice.spread) {
         spreadOnBread(BREAD_SLICE_1_ID, JELLY_BREAD);
-    } else if (sandwichStatus.secondSlice === READY) {
+        sandwichStatus.firstSlice.spread = true;
+    } else if (sandwichStatus.secondSlice.ready && !sandwichStatus.secondSlice.spread) {
         spreadOnBread(BREAD_SLICE_2_ID, JELLY_BREAD);    
-    } else {
-        alert("We're gonna need more bread!");
-    }
+        sandwichStatus.secondSlice.spread = true;
+    } 
 }
 
 
-function checkIfSandwichComplete() {
+function putSlicesTogether() {
+    if (!sandwichStatus.firstSlice.ready) {
+        alert("What slices?");
+        return;
+    }
+
+    if (!sandwichStatus.secondSlice.ready && !sandwichStatus.firstSlice.spread) {
+        alert("That's just one dry piece of bread!");
+        return;
+    }
+
+    if (!sandwichStatus.firstSlice.spread || !sandwichStatus.secondSlice.spread) {
+        let missing = sandwichStatus.spreadPb ? "Jelly" : "Peanut Butter";
+        alert(`You're missing a key ingredient!  Where's the ${missing}`);
+        return;
+    }
+
     if (sandwichStatus.spreadJelly && sandwichStatus.spreadPb) {
         sandwichStatus.complete = true;
+        document.getElementById(SANDWICH_ID).removeAttribute("hidden");
+        document.getElementById(BREAD_SLICE_1_ID).setAttribute("hidden", true);
+        document.getElementById(BREAD_SLICE_2_ID).setAttribute("hidden", true);
         alert("Congratulations! You have completed making a delicious PB & J sandwich");
     }
 }
@@ -149,3 +190,5 @@ function checkIfSandwichComplete() {
 function spreadOnBread(whichSlice, whatWeSpreading) {
     document.getElementById(whichSlice).textContent = whatWeSpreading;
 }
+
+
