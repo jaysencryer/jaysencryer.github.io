@@ -71,15 +71,13 @@ button {
     display: none;
 }
 
-div[hidden] {
-    display: none;
-}
 
 h2 {
     padding: 24px 0px 16px;
     text-align: center;
     color: white;
     text-shadow: 3px 3px 6px #37596d, -3px -3px 6px #302e58, 3px -3px 6px #37596d, -3px 3px 6px #302e58;
+    cursor: pointer;
 }
 
 h3 {
@@ -90,6 +88,7 @@ h3 {
 }
 
 
+
 a:link {
     text-decoration: none;
 }
@@ -98,7 +97,26 @@ a:link {
     padding: 150px;
 }
 
+#presentation div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#presentation div[hidden] {
+    display: none;
+}
+
 #congrats {
     margin-top: 20px;
     padding: 16px;
+}
+
+div[hidden] {
+    display: none;
+}
+
+p {
+    font-family: 'Courier New', Courier, monospace;
 }

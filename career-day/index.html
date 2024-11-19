@@ -5,20 +5,46 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="./main.js"></script>
     <link rel="stylesheet" href="style.css">
     <title>Betty Wheeler Career Day - Software Engineer</title>
 </head>
 
 <body>
-    <!-- <h1>Guess the Number</h1>
-        <form onsubmit=processGuess(event)>
-
-            <input type=number id="guess">
-        </form> -->
     <div id="presentation">
-        <h2>What is a Software Engineer?</h2>
-        <h2>What is Software?</h2>
-        <h2>How is Software made?</h2>
+        <h2 onclick=toggleEngineer()>What is a Software Engineer?</h2>
+        <div id="engineer" hidden="hidden">
+            <p>
+                Software Developer
+            </p>
+            <p>
+                Computer Programmer
+            </p>
+            <p>
+                Coder
+            </p>
+        </div>
+        <h2 onclick=toggleSoftware()>What is Software?</h2>
+        <div id="software" hidden="hidden">
+            <p>
+                Video Games
+            </p>
+            <p>
+                Applications
+            </p>
+        </div>
+        <h2 onclick=toggleHow()>How is Software made?</h2>
+        <div id="how" hidden="hidden">
+            <p>
+                Written in Code
+            </p>
+            <p>
+                Collaboratively
+            </p>
+            <p>
+                Iteratively
+            </p>
+        </div>
         <a href="./pbj.html">
 
             <h2>Algorithms</h2>
