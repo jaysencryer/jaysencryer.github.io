@@ -33,7 +33,10 @@ let jellyJarStatus = CLOSED;
 
 
 function takeASliceOfBread() {
-    if (breadBagStatus === CLOSED) {
+    let breadBag = document.getElementById(BREAD_BAG_ID);
+    let breadBagImage = breadBag.src;
+
+    if (breadBagStatus === CLOSED) {;
         alert("Unable to get bread!");
         return;
     }
@@ -46,11 +49,13 @@ function takeASliceOfBread() {
     if (sandwichStatus?.firstSlice?.ready) {
         sandwichStatus.secondSlice.ready = true;
         document.getElementById(BREAD_SLICE_2_ID).removeAttribute("hidden");
+        breadBag.src = breadBagImage.replace("slice1", "slice2");
         return;
     }
 
     sandwichStatus.firstSlice.ready = true;
     document.getElementById(BREAD_SLICE_1_ID).removeAttribute("hidden");
+    breadBag.src = breadBagImage.replace("open", "slice1");
 }
 
 function openBreadBag() {
@@ -107,6 +112,9 @@ function spreadPB() {
     let pbJar = document.getElementById(PB_JAR_ID);
     let imageChange = pbJar.src.replace("open", "spread");
     pbJar.src = imageChange;
+
+    spreadFilling(PB_JAR_ID);
+
     if (!sandwichStatus.firstSlice.spread) {
         spreadOnBread(BREAD_SLICE_1_ID, PB_BREAD);
         sandwichStatus.firstSlice.spread = true;
@@ -138,7 +146,6 @@ function spreadJelly() {
         alert("I guess we're making a counter & Jelly mess?");
         return;
     }
-
     
     if (sandwichStatus.firstSlice.spread && (!sandwichStatus.secondSlice.ready ||sandwichStatus.secondSlice.spread)) {
         alert("There's nowhere left to spread this Jelly!");
@@ -151,6 +158,8 @@ function spreadJelly() {
     }
 
     sandwichStatus.spreadJelly = true;
+    spreadFilling(JELLY_JAR_ID);
+
     if (!sandwichStatus.firstSlice.spread) {
         spreadOnBread(BREAD_SLICE_1_ID, JELLY_BREAD);
         sandwichStatus.firstSlice.spread = true;
@@ -183,12 +192,28 @@ function putSlicesTogether() {
         document.getElementById(SANDWICH_ID).removeAttribute("hidden");
         document.getElementById(BREAD_SLICE_1_ID).setAttribute("hidden", true);
         document.getElementById(BREAD_SLICE_2_ID).setAttribute("hidden", true);
-        alert("Congratulations! You have completed making a delicious PB & J sandwich");
     }
 }
 
 function spreadOnBread(whichSlice, whatWeSpreading) {
-    document.getElementById(whichSlice).textContent = whatWeSpreading;
+    let breadSlice = document.getElementById(whichSlice);
+    breadSlice.textContent = whatWeSpreading;
+    let spread;
+    if (whatWeSpreading === JELLY_BREAD) {
+        spread = "jelly";
+    } else {
+        spread = "pb";
+    }
+
+    let breadImage = breadSlice.src.replace("no",spread);
+    breadSlice.src = breadImage;
+    
 }
 
+function spreadFilling(jarId) {
+    let jar = document.getElementById(jarId);
+    let imageChange = jar.src.replace("open", "spread");
+    console.log(imageChange);
+    jar.src = imageChange;
+}
 

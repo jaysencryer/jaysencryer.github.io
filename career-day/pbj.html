@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="./pbjK1.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>What is a Software Engineer?</title>
+</head>
+
+<body>
+
+    <!-- <a href="./index.html">
+        <button>Home</button>
+    </a> -->
+
+    <div id="steps">
+        <button onclick=putSlicesTogether()>Put the Slices Together</button>
+        <button onclick=openPbJar()>Open Peanut Butter Jar</button>
+        <button onclick=takeASliceOfBread()>Take A Slice of Bread</button>
+        <button onclick=spreadPB()>Spread Peanut Butter</button>
+        <button onclick=openJellyJar()>Open Jelly Jar</button>
+        <button onclick=spreadJelly()>Spread Jelly</button>
+        <button onclick=openBreadBag()>Open Bread</button>
+    </div>
+    <div id="sandwich-stuff">
+        <div>
+            <image src="./images/bread_closed.png" alt="Closed Bread Bag" width="180" height="86" id="bread-bag">
+            </image>
+        </div>
+        <div>
+            <image src="./images/pb_closed.png" alt="Closed Peanut Butter Jar" width="88" height="108" id="pb-jar">
+            </image>
+        </div>
+        <div>
+            <image src="./images/jelly_closed.png" alt="Closed Jelly Jar" width="88" height="108" id="jelly-jar">
+            </image>
+        </div>
+    </div>
+    <div id="bread">
+
+        <div>
+            <image src="./images/bread_slice_no_spread.png" width="82" height="78" id="bread-slice1" hidden
+                alt="A Slice of bread with nothing on it"></image>
+        </div>
+        <div>
+            <image src="./images/bread_slice_no_spread.png" width="82" height="78" id="bread-slice2" hidden
+                alt="A Slice of bread with nothing on it"></image>
+        </div>
+        <div id="pb-j-sandwich" hidden>
+            <image src="./images/sandwich.png" width="160" height="48" alt="PB & J Sandwich"></image>
+            <div id="congrats">
+                <h3>Congratulations!!</h3>
+                <h3>You have completed making a delicious PB & J sandwich</h3>
+            </div>
+        </div>
+
+    </div>
+</body>
