@@ -1,31 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>jaysencryer.com</title>
-        
-        <link rel="stylesheet" href="styles.css">
-        
-    </head>
-    <body>
-        <div>
-            <div class="expand-div construction">
-                <div class="ed-head construction-head">
-                    <p>This site under construction<span class="collapse-button">+</span></p>
-                </div>
-                <div class="construction-body hidden"></div>
-            </div>
-        </div>
-        <div class="expand-div expanded red">
-            <div class="ed-head red">
-                <p>This is a different part<span class="collapse-button">-</span></p>
-            </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jaysencryer.com</title>
+    <style>
+        /* WB 2.0 Color Palette */
+        :root {
+            --wb-blue: #0055aa;
+            --wb-grey: #aaaaaa;
+            --wb-white: #ffffff;
+            --wb-black: #000000;
+            --wb-light-grey: #bbbbbb;
+        }
 
-        </div>
-        <div class="expand-div" style="background:blue">
-            <p>Yet another<span class="collapse-button">expander toggle</span></p>
-        </div>
-        <script src="jccom.js"></script>
-    </body>
+        * { box-sizing: border-box; cursor: url('pointer.png') 0 0, default; }
 
+        body, html {
+            margin: 0; padding: 0;
+            height: 100%;
+            background-color: var(--wb-blue);
+            font-family: "Courier New", Courier, monospace; /* Closest system fallback to Topaz */
+            font-weight: bold;
+            overflow: hidden;
+            font-size: 14px;
+			
+        }
+
+        /* --- Top Bar --- */
+        #top-bar {
+            background-color: var(--wb-white);
+            height: 22px;
+            border-bottom: 2px solid var(--wb-black);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10px;
+            z-index: 9999;
+            position: relative;
+        }
+
+        /* --- Window Styles --- */
+        .amiga-window {
+            position: absolute;
+            background-color: var(--wb-grey);
+            border: 2px solid var(--wb-black);
+            box-shadow: inset 2px 2px var(--wb-white), inset -2px -2px var(--wb-black);
+            min-width: 250px;
+            min-height: 150px;
+        }
+
+        .window-header {
+            background-color: var(--wb-white);
+            height: 20px;
+            border-bottom: 2px solid var(--wb-black);
+            display: flex;
+            align-items: center;
+        }
+
+        /*.window-header:active { cursor: grabbing; }*/
+
+        .close-gadget {
+            width: 10px;
+            height: 10px;
+            border: 2px solid var(--wb-black);
+            margin: 0 5px;
+            background: none;
+        }
+
+        .window-title {
+            flex-grow: 1;
+            text-align: center;
+            color: var(--wb-black);
+            font-size: 12px;
+            pointer-events: none;
+        }
+
+        .window-content {
+            padding: 15px;
+            color: var(--wb-black);
+            overflow-y: auto;
+            height: calc(100% - 20px);
+        }
+
+        /* --- Icons --- */
+        .icon-container {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .icon {
+            width: 64px;
+            text-align: center;
+            color: var(--wb-white);
+        }
+
+        .icon img {
+            width: 48px;
+            height: 48px;
+            background-color: var(--wb-grey);
+            border: 2px solid var(--wb-black);
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<header id="top-bar">
+    <div>Jaysen Cryer dot com</div>
+    <div id="clock">12:00 PM</div>
+</header>
+
+<div class="icon-container">
+    <div class="icon" onclick="openWindow('projects')">
+        <div style="width:48px; height:48px; background:white; border:2px solid black; margin:auto;"></div>
+        <span>Projects</span>
+    </div>
+</div>
+
+<div id="window-projects" class="amiga-window" style="top: 100px; left: 200px; width: 400px; height: 300px;">
+    <div class="window-header" onmousedown="startDrag(event, 'window-projects')">
+        <div class="close-gadget" onclick="this.parentElement.parentElement.style.display='none'"></div>
+        <span class="window-title">Ram Disk:Projects</span>
+    </div>
+    <div class="window-content">
+        <h2>Under Construction</h2>
+      
+        <ul>
+            <li><a href="https://github.com/jaysencryer" target="_blank">github</a></li>
+            <li>resume</li>
+            <li>YouTube</li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    // Simple Clock
+    function updateClock() {
+        const now = new Date();
+        document.getElementById('clock').innerText = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Vanilla Drag and Drop
+    let activeWindow = null;
+    let offset = { x: 0, y: 0 };
+    let highestZ = 10;
+
+    function startDrag(e, id) {
+        activeWindow = document.getElementById(id);
+        
+        // Bring to front
+        highestZ++;
+        activeWindow.style.zIndex = highestZ;
+
+        offset.x = e.clientX - activeWindow.offsetLeft;
+        offset.y = e.clientY - activeWindow.offsetTop;
+        
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('mouseup', stopDrag);
+    }
+
+    function drag(e) {
+        if (!activeWindow) return;
+        activeWindow.style.left = (e.clientX - offset.x) + 'px';
+        activeWindow.style.top = (e.clientY - offset.y) + 'px';
+    }
+
+    function stopDrag() {
+        activeWindow = null;
+        document.removeEventListener('mousemove', drag);
+        document.removeEventListener('mouseup', stopDrag);
+    }
+
+    function openWindow(id) {
+        const win = document.getElementById('window-' + id);
+        win.style.display = 'block';
+        highestZ++;
+        win.style.zIndex = highestZ;
+    }
+</script>
+
+</body>
 </html>
